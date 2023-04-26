@@ -3,6 +3,9 @@
 
 name: .NET
 
+env:
+  solutionFile: src/Katas.sln
+  
 on:
   push:
     branches: [ "main" ]
@@ -21,8 +24,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ${{ env.solutionFile }}
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build ${{ env.solutionFile }} --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ${{ env.solutionFile }} --no-build --verbosity normal
